@@ -1,10 +1,10 @@
 import React from 'react'
-import {BrowserRouter as Router,Routes,Route,Link} from 'react-router-dom'
-import AddBook from './components/AddBook'
+import{BrowserRouter as Router,Routes,Route,Link} from 'react-router-dom'
 import ViewBook from './components/ViewBook'
-import SearchBook from './components/SearchBook'
-import UpdateBook from './components/UpdateBook'
 import DeleteBook from './components/DeleteBook'
+import SearchBook from './components/SearchBook'
+import AddBook from './components/AddBook'
+import UpdateBook from './components/UpdateBook'
 import './App.css'
 const App = () => {
   return (
@@ -18,11 +18,11 @@ const App = () => {
           <Link to="/delete">Delete Book</Link>
         </nav>
         <Routes>
-          <Route path='/add' element={<AddBook/>} />
-          <Route path='/view' element={<ViewBook/>} />
-          <Route path='/search' element={<SearchBook/>} />
-          <Route path='/update' element={<UpdateBook/>} />
-          <Route path='/delete' element={<DeleteBook/>} />
+          <Route path='/add' element={<AddBook/>}/>
+          <Route path='/view' element={<ViewBook/>}/>
+          <Route path='/delete' element={<DeleteBook/>}/>
+          <Route path='/search' element={<SearchBook/>}/>
+          <Route path='/update' element={<UpdateBook/>}/>
         </Routes>
       </Router>
     </div>

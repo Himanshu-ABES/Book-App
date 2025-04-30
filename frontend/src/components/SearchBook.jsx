@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './SearchBook.css';
 
 const SearchBook = () => {
   const [query, setQuery] = useState('');
@@ -13,7 +12,7 @@ const SearchBook = () => {
     }
 
     try {
-      const res = await axios.get(`https://book-app-31ms.onrender.com/search?title=${query}`);
+      const res = await axios.get(`http://localhost:9000/search?title=${query}`);
       setBooks(res.data);
     } catch (error) {
       console.error(error);
@@ -22,30 +21,28 @@ const SearchBook = () => {
   };
 
   return (
-    <div className="search-container">
-      <h2>🔍 Search Books</h2>
-      <div className="search-box">
-        <input
-          type="text"
-          placeholder="Enter book title..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button onClick={handleSearch}>Search</button>
-      </div>
+    <div>
+      <h2>Search Books</h2>
+      <input
+        type="text"
+        placeholder="Enter book title"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+      <button onClick={handleSearch}>Search</button>
 
-      <div className="results-grid">
+      <div>
         {books.length > 0 ? (
-          books.map((book) => (
-            <div className="book-card" key={book._id}>
-              <img src={book.image} alt={book.title} />
-              <h3>{book.title}</h3>
-              <p><strong>Author:</strong> {book.author}</p>
-              <p><strong>Date:</strong> {book.date}</p>
-            </div>
-          ))
+          <ul>
+            {books.map((book) => (
+              <li key={book._id}>
+                <strong>{book.title}</strong> by {book.author} <br />
+                <img src={book.image} alt={book.title} width="100" />
+              </li>
+            ))}
+          </ul>
         ) : (
-          <p className="no-results">No books found</p>
+          <p>No books found</p>
         )}
       </div>
     </div>

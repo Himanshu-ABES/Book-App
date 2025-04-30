@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './DeleteBook.css';
 
 const DeleteBook = () => {
   const [books, setBooks] = useState([]);
 
+  // Fetch all books on component mount
   useEffect(() => {
     fetchBooks();
   }, []);
 
   const fetchBooks = async () => {
     try {
-      const res = await axios.get('https://book-app-31ms.onrender.com/books');
+      const res = await axios.get('http://localhost:9000/books');
       setBooks(res.data);
     } catch (error) {
       console.error(error);
@@ -20,13 +20,13 @@ const DeleteBook = () => {
   };
 
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm('Are you sure you want to delete this book?');
+    const confirmDelete = confirm('Are you sure you want to delete this book?');
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`https://book-app-31ms.onrender.com/books/${id}`);
+      await axios.delete(`http://localhost:9000/books/${id}`);
       alert('Book deleted successfully');
-      fetchBooks(); // Refresh the list
+      fetchBooks(); // Refresh book list after deletion
     } catch (error) {
       console.error(error);
       alert('Error deleting book');
@@ -34,15 +34,15 @@ const DeleteBook = () => {
   };
 
   return (
-    <div className="delete-book-container">
+    <div>
       <h2>Delete Books</h2>
       {books.length === 0 ? (
         <p>No books available</p>
       ) : (
-        <ul className="book-list">
+        <ul>
           {books.map((book) => (
             <li key={book._id}>
-              <strong>{book.title}</strong> by {book.author}
+              <strong>{book.title}</strong> by {book.author}{' '}
               <button onClick={() => handleDelete(book._id)}>Delete</button>
             </li>
           ))}
